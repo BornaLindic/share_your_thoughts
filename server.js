@@ -14,6 +14,10 @@ app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+app.get("/thoughts", function (req, res) {
+    res.sendFile(path.join(__dirname, "public", "thoughts.html"));
+});
+
 app.use(express.static(path.join(__dirname, "public")));
 
 // potrebno za VER05+
@@ -49,19 +53,19 @@ app.post("/saveAudio",  function (req, res) {
     });
 });
 
-app.get("/recordings", function (req, res) {
+app.get("/saved_thoughts", function (req, res) {
     let files = fse.readdirSync(UPLOAD_PATH);
     files = files.reverse().slice(0, 10);
     console.log("In", UPLOAD_PATH, "there are", files);
+
+    thoughts = []
+    for (file of files) {
+
+    }
     res.json({
         files
     });
 });
-// /potrebno za VER05+
-
-
-
-
 
 // potrebno na VER06
 const webpush = require('web-push');

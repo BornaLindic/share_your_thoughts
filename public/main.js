@@ -62,6 +62,7 @@ async function main () {
       })
 
       buttonUpload.addEventListener("click", event => {
+            buttonUpload.setAttribute('disabled', 'disabled')
             event.preventDefault();
             if (!audioName.value.trim()) {
                 alert("Enter audio name!");

@@ -54,8 +54,10 @@ self.addEventListener("fetch", (event) => {
                         return caches.match("404.html");
                     }
                     return caches.open(staticCacheName).then((cache) => {
-                        console.log(">>> Caching: " + event.request.url);
-                        cache.put(event.request.url, response.clone());
+                        if (response.status === 202) {
+                            console.log(">>> Caching: " + event.request.url);
+                            cache.put(event.request.url, response.clone());
+                        }
                         return response;
                     });
                 });

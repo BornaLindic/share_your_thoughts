@@ -9,6 +9,8 @@ const httpPort = 80;
 const app = express();
 app.use(express.json()); // za VER06
 
+const externalUrl = process.env.RENDER_EXTERNAL_URL;
+const port = externalUrl && process.env.PORT ? parseInt(process.env.PORT) : 4010;
 
 app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -100,7 +102,15 @@ async function sendPushNotifications(snapTitle) {
 }
 
 
-app.listen(httpPort, function () {
-    console.log(`HTTP listening on port: ${httpPort}`);
-});
-
+if (externalUrl) {
+    const hostname = '0.0.0.0';
+    app.listen(port, hostname, () => {
+      console.log(`Server locally running at http://${hostname}:${port}/ and from
+      outside on ${externalUrl}`);}
+      );
+  } else {
+    const hostname = '127.0.0.1';
+    app.listen(port, hostname, () => {
+      console.log(`Server running at http://${hostname}:${port}/`);
+    });
+  }

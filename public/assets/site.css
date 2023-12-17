@@ -23,3 +23,7 @@ div.logo-wrapper img {
 div.audio-box {
   padding-top: 20px;
 }
+
+.audio-box-title {
+  padding-bottom: 5px;
+}

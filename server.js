@@ -3,8 +3,9 @@ const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
 const fse = require('fs-extra');
-const httpPort = 80;
+const dotenv = require('dotenv')
 
+dotenv.config()
 
 const app = express();
 app.use(express.json()); // za VER06

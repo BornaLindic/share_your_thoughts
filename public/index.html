@@ -15,6 +15,12 @@
 
   home
 
+  <div class="text-end">
+    <button id="btnEnableNotifications" class="btn btn-outline-success">
+        <i class="bi bi-bell"></i>
+    </button>
+  </div>
+
   <script>
     navigator.serviceWorker.register('./sw.js', {type: 'module'})
       .then(reg => console.log('SW registered!', reg))
@@ -41,6 +47,7 @@
 
   <script src="encode-audio.js"></script>
   <script src="main.js" type="module"></script>
+  <script src="push.js"></script>
 
 </body>
 </html>

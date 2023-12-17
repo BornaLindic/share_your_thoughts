@@ -13,7 +13,7 @@ fetch('/saved_thoughts', {
                         let audioBox = audio.querySelector('.audio-box > audio')
                         audioBox.src = `uploads/${thought}`
                         let audioName = audio.querySelector('div.audio-box-title.font-secondary.main-color-emphasized');
-                        audioName.textContent = thought;
+                        audioName.textContent = thought.substring(24, thought.length - 4);
                         gallery.appendChild(audio);
                     }
                 });

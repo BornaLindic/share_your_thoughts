@@ -48,7 +48,7 @@ app.post("/saveAudio",  function (req, res) {
             console.log("Saving audio!")
             console.log(req.body);
             res.json({ success: true, id: req.body.id });
-            //if (VERSION==="06") await sendPushNotifications(req.body.title);
+            await sendPushNotifications(req.body.title);
         }
     });
 });
@@ -57,20 +57,12 @@ app.get("/saved_thoughts", function (req, res) {
     let files = fse.readdirSync(UPLOAD_PATH);
     files = files.reverse().slice(0, 10);
     console.log("In", UPLOAD_PATH, "there are", files);
-
-    thoughts = []
-    for (file of files) {
-
-    }
     res.json({
         files
     });
 });
 
-// potrebno na VER06
 const webpush = require('web-push');
-
-// Umjesto baze podataka, čuvam pretplate u datoteci: 
 let subscriptions = [];
 const SUBS_FILENAME = 'subscriptions.json';
 try {
@@ -90,24 +82,22 @@ app.post("/saveSubscription", function(req, res) {
 });
 
 async function sendPushNotifications(snapTitle) {
-    webpush.setVapidDetails('mailto:igor.mekterovic@fer.hr', 
-    'BL1oXiSXCjKRPParkSNUP7ik7Ltl3RpPUxurkh7ro4rdpNLylON7f3xxZryBF_xN8CqxvemlVdT2EJGH33qe5iw', 
-    '4B9u-sA9uJ8zISw3FXlsbbsaVixK3NJn6o_BZshEZnI');
+    webpush.setVapidDetails('mailto:borna.lindic@fer.hr', 
+    'BFiL4FxF_G7pMylaAjP9Tw7NJnGecaijqQyahKKPhv7EOSjTG-dax50SjlK7_bMmtoGlqV-J6MfDPr6rXqTCaCs', 
+    'ka8IWga3jNhbwqxyK-2VuC1WiCkTivNCexCt5YiWdj0');
     subscriptions.forEach(async sub => {
         try {
             console.log("Sending notif to", sub);
             await webpush.sendNotification(sub, JSON.stringify({
-                title: 'New snap!',
-                body: 'Somebody just snaped a new photo: ' + snapTitle,
-                redirectUrl: '/index.html'
+                title: 'New thought!',
+                body: 'Somebody just shared a thought: ' + snapTitle,
+                redirectUrl: '/thoughts.html'
               }));    
         } catch (error) {
             console.error(error);
         }
     });
 }
-// /potrebno na VER06
-
 
 
 app.listen(httpPort, function () {

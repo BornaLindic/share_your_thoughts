@@ -19,3 +19,7 @@ div.logo-wrapper img {
   max-width: 75%;
   max-height: 800px;
 }
+
+div.audio-box {
+  padding-top: 20px;
+}

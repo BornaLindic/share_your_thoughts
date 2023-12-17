@@ -1,10 +1,12 @@
 import {del, entries} from "https://cdn.jsdelivr.net/npm/idb-keyval@6/+esm";
 const filesToCache = [
     "/",
+    "thoughts.html",
     "manifest.json",
     "index.html",
     "offline.html",
     "404.html",
+    "assets/site.css"
 ];
 
 const staticCacheName = "static-cache";
@@ -54,7 +56,7 @@ self.addEventListener("fetch", (event) => {
                         return caches.match("404.html");
                     }
                     return caches.open(staticCacheName).then((cache) => {
-                        if (response.status === 202) {
+                        if (response.status === 200) {
                             console.log(">>> Caching: " + event.request.url);
                             cache.put(event.request.url, response.clone());
                         }
@@ -148,8 +150,8 @@ self.addEventListener("push", function (event) {
 
     var options = {
         body: data.body,
-        icon: "assets/img/android/android-launchericon-96-96.png",
-        badge: "assets/img/android/android-launchericon-96-96.png",
+        icon: "assets/img/windows11/Square44x44Logo.targetsize-96.png",
+        badge: "assets/img/windows11/Square44x44Logo.targetsize-96.png",
         vibrate: [200, 100, 200, 100, 200, 100, 200],
         data: {
             redirectUrl: data.redirectUrl,

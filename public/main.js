@@ -66,6 +66,7 @@ async function main () {
             event.preventDefault();
             if (!audioName.value.trim()) {
                 alert("Enter audio name!");
+                buttonUpload.removeAttribute('disabled')
                 return false;
             }
             if ("serviceWorker" in navigator && "SyncManager" in window) {
